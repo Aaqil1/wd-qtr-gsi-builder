@@ -1,0 +1,20 @@
+COMPUTE WS-SOCSEC =  BCF-SC-F-FICAR-WAGE-P +        (GSI Code :FP/6B)
+                     BCF-SC-F-FICAR-WAGE-N.          (GSI Code :FP/6B)
+
+COMPUTE WS-MEDICR =  BCF-SC-F-MEDIER-WAGE-P +       (GSI Code: IC)
+                     BCF-SC-F-MEDIER-WAGE-N.         (GSI Code: IC)
+
+COMPUTE WS-FIT    =  BCF-SC-F-FIT-WH-P +            (GSI Code:EJ)
+                     BCF-SC-F-FIT-WH-N.              (GSI Code:EJ)
+
+COMPUTE WS-3PSP   =  BCF-SC-F-3PSP-TAX-MEDI +       (GSI CODE : IA/7A)
+                     BCF-SC-F-3PSP-TAX.              (GSI CODE: FL/5Y)
+
+IF WS-FIT         < ZERO OR
+   WS-SOCSEC      < ZERO OR
+   WS-MEDICR      < ZERO OR
+   BCF-QTD-EEMEDISR-WG < ZERO OR                    (GSI Code:ZE)
+   BCF-QTD-EEMEDISR-TX < ZERO OR                    (GSI Code:ZF)
+   BCF-SC-F-EIC   > ZERO  OR                        (GSI Code:EL)
+   (WS-A01-CPA = 'Y' AND WS-3PSP < ZERO ) OR
+   WS-MEDICR      < WS-SOCSEC
