@@ -1,0 +1,12 @@
+---
+emailAddressFail: "tax-team@ADP.com"
+emailAddressProdFail: "tax-team@ADP.com"
+emailAddressProdSuccess: "tax-team@ADP.com"
+emailAddressSuccess: "tax-team@ADP.com"
+emailDocumentLink: "https://confluence.es.ad.adp.com/pages/viewpage.action?pageId=995460124"
+ditdeploymentgroup: "TAX_REPORTS_DEV,CS_TAX_DARK_HELMET_QA,CAPS_AVS_DEVOPS_RELEASEENGINEERING,onetax-cicd-dev,onetax-cicd-admin"
+fitdeploymentgroup: "TAX_REPORTS_DEV,CS_TAX_DARK_HELMET_QA,CAPS_AVS_DEVOPS_RELEASEENGINEERING,onetax-cicd-dev,onetax-cicd-admin"
+iatdeploymentgroup: "TAX_REPORTS_DEV,CS_TAX_DARK_HELMET_QA,CAPS_AVS_DEVOPS_RELEASEENGINEERING,CAPS_AVS_DEVOPS_SYSTEMS_PROD_ENGINEERING,onetax-cicd-admin,onetax-iat-deployment"
+preproddeploymentgroup: "TAX_REPORTS_DEV,CS_TAX_DARK_HELMET_QA,CAPS_AVS_DEVOPS_RELEASEENGINEERING,onetax-cicd-admin"
+prddeploymentgroup: "CAPS_AVS_DEVOPS_RELEASEENGINEERING"
+productname: "cs-onetax"
