@@ -1,0 +1,1002 @@
+{
+  "applicationArea": {
+    "scOrgId": "<SCORGID_REDACTED>",
+    "transactionId": "<UUID_REDACTED>",
+    "cdmVersion": "1.1.2",
+    "event": "PeriodicTaxDeposit",
+    "creationDate": 1772178303318,
+    "runType": "TEST",
+    "targetProducts": [
+      "EmploymentTaxPeriodic"
+    ],
+    "profileType": "LIVE"
+  },
+  "organization": {
+    "name": "<NAME_REDACTED>",
+    "organizationID": "<ORGANIZATIONID_REDACTED>",
+    "address": [],
+    "legalName": "<LEGALNAME_REDACTED>",
+    "dbaName": "<DBANAME_REDACTED>",
+    "identifier": [
+      {
+        "value": "<OrganizationOID_REDACTED>",
+        "type": "OrganizationOID"
+      }
+    ],
+    "governmentIdentifier": [],
+    "paySystem": {
+      "version": "v41.1",
+      "adpSystemIndicator": false,
+      "type": "Workday"
+    },
+    "contact": [],
+    "communication": [],
+    "segment": "Majors",
+    "organizationUnit": [
+      {
+        "taxPeriod": {
+          "period": {
+            "startDate": 1546332263000,
+            "endDate": 1773684705000
+          },
+          "quarter": 1,
+          "year": 0,
+          "month": 0,
+          "taxPeriodType": "Month"
+        },
+        "earningCode": [],
+        "deductionCode": [],
+        "employerDeductionCode": [],
+        "name": "<NAME_REDACTED>",
+        "organizationID": "<UUID_REDACTED>",
+        "address": [
+          {
+            "lineOne": "<LINEONE_REDACTED>",
+            "lineTwo": "<LINETWO_REDACTED>",
+            "cityName": "New York",
+            "state": {
+              "value": "<VALUE_REDACTED>",
+              "name": "<NAME_REDACTED>"
+            },
+            "postalCode": "<POSTALCODE_REDACTED>",
+            "countryCode": "US",
+            "type": "Shipping",
+            "effectiveFrom": 1217376000000,
+            "primary": false
+          },
+          {
+            "lineOne": "<LINEONE_REDACTED>",
+            "lineTwo": "<LINETWO_REDACTED>",
+            "cityName": "Chicago",
+            "state": {
+              "value": "<VALUE_REDACTED>",
+              "name": "<NAME_REDACTED>"
+            },
+            "postalCode": "<POSTALCODE_REDACTED>",
+            "countryCode": "US",
+            "type": "Shipping",
+            "effectiveFrom": 1199145600000,
+            "primary": false
+          },
+          {
+            "lineOne": "<LINEONE_REDACTED>",
+            "lineTwo": "<LINETWO_REDACTED>",
+            "cityName": "San Francisco",
+            "state": {
+              "value": "<VALUE_REDACTED>",
+              "name": "<NAME_REDACTED>"
+            },
+            "postalCode": "<POSTALCODE_REDACTED>",
+            "countryCode": "US",
+            "type": "Shipping",
+            "effectiveFrom": 1201219200000,
+            "primary": true
+          }
+        ],
+        "legalName": "<LEGALNAME_REDACTED>",
+        "dbaName": "<DBANAME_REDACTED>",
+        "identifier": [
+          {
+            "value": "<Other_REDACTED>",
+            "type": "Other"
+          },
+          {
+            "value": "<BranchCode_REDACTED>",
+            "type": "BranchCode"
+          },
+          {
+            "value": "<CompanyCode_REDACTED>",
+            "type": "CompanyCode"
+          },
+          {
+            "value": "<SiteID_REDACTED>",
+            "type": "SiteID"
+          }
+        ],
+        "governmentIdentifier": [
+          {
+            "type": "FEIN",
+            "value": "<FEIN_REDACTED>"
+          }
+        ],
+        "contact": [],
+        "communication": [],
+        "organizationUnitID": "<UUID_REDACTED>",
+        "payrollRun": [
+          {
+            "payrollGroup": {
+              "code": {
+                "value": "<VALUE_REDACTED>",
+                "name": "<NAME_REDACTED>"
+              }
+            },
+            "payrollRunID": "<UUID_REDACTED>",
+            "payPeriod": {
+              "startDate": 1548633600000,
+              "endDate": 1773684705000
+            },
+            "weekNumber": "0",
+            "offCycleIndicator": "false",
+            "payDate": "1757194355000",
+            "workerTaxSummary": [
+              {
+                "workerID": "<WORKERID_REDACTED>",
+                "taxPeriod": {
+                  "period": {
+                    "startDate": 1548633600000,
+                    "endDate": 1549152000000
+                  },
+                  "quarter": 0,
+                  "year": 0
+                },
+                "taxJurisdiction": [
+                  {
+                    "jurisdiction": {
+                      "code": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "state": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "city": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "psdCode": "220079",
+                      "livedInJurisdictionID": "22079",
+                      "type": "Local"
+                    },
+                    "tax": [
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 0
+                        },
+                        "qtdAmount": {
+                          "value": 0
+                        },
+                        "ytdAmount": {
+                          "value": 0
+                        },
+                        "taxableAmount": {
+                          "value": 0
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "subjectAmount": {
+                          "value": 4075.02
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "grossWages": {
+                          "value": 4075.02
+                        },
+                        "qtdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "ytdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "taxType": "Other",
+                        "isEmployerTax": true
+                      }
+                    ]
+                  },
+                  {
+                    "jurisdiction": {
+                      "code": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "state": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "psdCode": "220000",
+                      "livedInJurisdictionID": "LA",
+                      "type": "State"
+                    },
+                    "taxProfile": {
+                      "jurisdiction": {
+                        "code": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "state": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "type": "State"
+                      },
+                      "filingStatus": "Single",
+                      "numberOfAllowances": 5,
+                      "suiExemptIndicator": true
+                    },
+                    "tax": [
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 80.95
+                        },
+                        "qtdAmount": {
+                          "value": 1069.22
+                        },
+                        "ytdAmount": {
+                          "value": 1069.22
+                        },
+                        "qtdOvertimeAmount": {
+                          "value": 0
+                        },
+                        "ytdOvertimeAmount": {
+                          "value": 0
+                        },
+                        "taxableAmount": {
+                          "value": 1823.68
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 21456.26
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 21456.26
+                        },
+                        "subjectAmount": {
+                          "value": 1823.68
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 21456.26
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 21456.26
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "SIT",
+                        "isEmployerTax": false
+                      },
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 0
+                        },
+                        "qtdAmount": {
+                          "value": 91.63
+                        },
+                        "ytdAmount": {
+                          "value": 91.63
+                        },
+                        "taxableAmount": {
+                          "value": 0
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "subjectAmount": {
+                          "value": 4075.02
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "grossWages": {
+                          "value": 4075.02
+                        },
+                        "qtdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "ytdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "taxType": "SUI",
+                        "isEmployerTax": true
+                      }
+                    ]
+                  },
+                  {
+                    "jurisdiction": {
+                      "code": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "state": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "city": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "psdCode": "220081",
+                      "livedInJurisdictionID": "22081",
+                      "type": "Local"
+                    },
+                    "tax": [
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 0
+                        },
+                        "qtdAmount": {
+                          "value": 0
+                        },
+                        "ytdAmount": {
+                          "value": 0
+                        },
+                        "taxableAmount": {
+                          "value": 0
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "subjectAmount": {
+                          "value": 4075.02
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "grossWages": {
+                          "value": 4075.02
+                        },
+                        "qtdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "ytdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "taxType": "Other",
+                        "isEmployerTax": true
+                      }
+                    ]
+                  },
+                  {
+                    "jurisdiction": {
+                      "code": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "state": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "city": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "psdCode": "220080",
+                      "livedInJurisdictionID": "22080",
+                      "type": "Local"
+                    },
+                    "tax": [
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 0
+                        },
+                        "qtdAmount": {
+                          "value": 0
+                        },
+                        "ytdAmount": {
+                          "value": 0
+                        },
+                        "taxableAmount": {
+                          "value": 0
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 7700
+                        },
+                        "subjectAmount": {
+                          "value": 4075.02
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "grossWages": {
+                          "value": 4075.02
+                        },
+                        "qtdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "ytdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "taxType": "Other",
+                        "isEmployerTax": true
+                      }
+                    ]
+                  },
+                  {
+                    "jurisdiction": {
+                      "code": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "psdCode": "000000",
+                      "livedInJurisdictionID": "FEDERAL",
+                      "type": "Federal"
+                    },
+                    "taxProfile": {
+                      "jurisdiction": {
+                        "code": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "type": "Federal"
+                      },
+                      "filingStatus": "Single",
+                      "numberOfAllowances": 5
+                    },
+                    "tax": [
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 58.08
+                        },
+                        "qtdAmount": {
+                          "value": 500.93
+                        },
+                        "ytdAmount": {
+                          "value": 500.93
+                        },
+                        "taxableAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "subjectAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "Medicare",
+                        "isEmployerTax": true
+                      },
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 0
+                        },
+                        "qtdAmount": {
+                          "value": 0
+                        },
+                        "ytdAmount": {
+                          "value": 0
+                        },
+                        "taxableAmount": {
+                          "value": 1823.68
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 21456.26
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 21456.26
+                        },
+                        "subjectAmount": {
+                          "value": 1823.68
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 21456.26
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 21456.26
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "FIT",
+                        "isEmployerTax": false
+                      },
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 0
+                        },
+                        "qtdAmount": {
+                          "value": 42
+                        },
+                        "ytdAmount": {
+                          "value": 42
+                        },
+                        "taxableAmount": {
+                          "value": 0
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 7000
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 7000
+                        },
+                        "subjectAmount": {
+                          "value": 4075.02
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34680.9
+                        },
+                        "grossWages": {
+                          "value": 4075.02
+                        },
+                        "qtdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "ytdGrossWages": {
+                          "value": 34680.9
+                        },
+                        "taxType": "FUTA",
+                        "isEmployerTax": true
+                      },
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 248.35
+                        },
+                        "qtdAmount": {
+                          "value": 2141.93
+                        },
+                        "ytdAmount": {
+                          "value": 2141.93
+                        },
+                        "taxableAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "subjectAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "SocialSecurity",
+                        "isEmployerTax": false
+                      },
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 58.08
+                        },
+                        "qtdAmount": {
+                          "value": 500.93
+                        },
+                        "ytdAmount": {
+                          "value": 500.93
+                        },
+                        "taxableAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "subjectAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "Medicare",
+                        "isEmployerTax": false
+                      },
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 248.35
+                        },
+                        "qtdAmount": {
+                          "value": 2141.93
+                        },
+                        "ytdAmount": {
+                          "value": 2141.93
+                        },
+                        "taxableAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 34547.18
+                        },
+                        "subjectAmount": {
+                          "value": 4005.5
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 34547.18
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "SocialSecurity",
+                        "isEmployerTax": true
+                      }
+                    ]
+                  },
+                  {
+                    "jurisdiction": {
+                      "code": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "state": {
+                        "value": "<VALUE_REDACTED>",
+                        "name": "<NAME_REDACTED>"
+                      },
+                      "psdCode": "210000",
+                      "livedInJurisdictionID": "KY",
+                      "type": "State"
+                    },
+                    "taxProfile": {
+                      "jurisdiction": {
+                        "code": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "state": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "type": "State"
+                      },
+                      "filingStatus": "Single",
+                      "numberOfAllowances": 5
+                    },
+                    "tax": [
+                      {
+                        "taxCode": {
+                          "value": "<VALUE_REDACTED>",
+                          "name": "<NAME_REDACTED>"
+                        },
+                        "amount": {
+                          "value": 30
+                        },
+                        "qtdAmount": {
+                          "value": 180
+                        },
+                        "ytdAmount": {
+                          "value": 180
+                        },
+                        "qtdOvertimeAmount": {
+                          "value": 0
+                        },
+                        "ytdOvertimeAmount": {
+                          "value": 0
+                        },
+                        "taxableAmount": {
+                          "value": 1823.68
+                        },
+                        "qtdTaxableAmount": {
+                          "value": 21456.26
+                        },
+                        "ytdTaxableAmount": {
+                          "value": 21456.26
+                        },
+                        "subjectAmount": {
+                          "value": 1823.68
+                        },
+                        "qtdSubjectAmount": {
+                          "value": 21456.26
+                        },
+                        "ytdSubjectAmount": {
+                          "value": 21456.26
+                        },
+                        "grossWages": {
+                          "value": 4076.35
+                        },
+                        "qtdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "ytdGrossWages": {
+                          "value": 34688.88
+                        },
+                        "taxType": "SIT",
+                        "isEmployerTax": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "worker": [
+          {
+            "accruedLeave": [],
+            "leaveHistory": [],
+            "workerID": "<WORKERID_REDACTED>",
+            "identifier": [
+              {
+                "value": "<VALUE_REDACTED>",
+                "type": "EmployeeID"
+              }
+            ],
+            "person": {
+              "name": {
+                "familyName": "<FAMILYNAME_REDACTED>",
+                "givenName": "<GIVENNAME_REDACTED>",
+                "middleName": "O"
+              },
+              "jobTitle": "CSR",
+              "governmentIdentifier": [
+                {
+                  "value": "<SSN_REDACTED>",
+                  "type": "SSN",
+                  "country": "US",
+                  "effectiveDate": "2018-01-21T00:00:00.000Z"
+                }
+              ],
+              "communication": {
+                "phone": [
+                  {
+                    "areaDialing": "<AREADIALING_REDACTED>",
+                    "dialNumber": "<DIALNUMBER_REDACTED>",
+                    "formattedNumber": "<PHONE_REDACTED>",
+                    "type": "Home",
+                    "primary": true
+                  }
+                ],
+                "email": []
+              }
+            },
+            "profile": {
+              "statutoryEmployeeIndicator": true,
+              "stockOwnerIndicator": true,
+              "stockOwnerPercentage": 20,
+              "corporateOfficerIndicator": true,
+              "relationshiptocorporateofficer": true,
+              "ownershipIndicator": 25,
+              "workFromHomeIndicator": true,
+              "taxProfile": [],
+              "printProfile": {
+                "suppressPayStatementPrintIndicator": true,
+                "suppressW2PrintIndicator": true,
+                "w2SpecialHandleIndicator": true,
+                "postW2Indicator": true
+              },
+              "benefitsProfile": {
+                "retirementPlanIndicator": true,
+                "thirdPartySickPayIndicator": true
+              }
+            },
+            "dates": {
+              "originalHireDate": 1516608000000,
+              "adjustmentServiceDate": 1516608000000,
+              "terminationDate": 1547971200000
+            },
+            "workAssignment": [
+              {
+                "positionTitle": "CSR",
+                "department": {
+                  "code": {
+                    "value": "<VALUE_REDACTED>",
+                    "name": "<NAME_REDACTED>"
+                  }
+                },
+                "jobTitle": "CSR",
+                "payrollGroup": {
+                  "code": {
+                    "value": "<VALUE_REDACTED>"
+                  },
+                  "payFrequency": "Weekly"
+                },
+                "group": [
+                  {
+                    "code": {
+                      "value": "<VALUE_REDACTED>"
+                    },
+                    "type": "Location"
+                  }
+                ],
+                "clazz": "FullTime",
+                "payFrequency": "Weekly",
+                "remuneration": {
+                  "remunerationBasis": "Hourly",
+                  "baseRemuneration": {
+                    "hourlyRateAmount": {
+                      "value": 33.6538
+                    }
+                  }
+                },
+                "type": "Seasonal",
+                "scheduledHoursPerWeek": 40,
+                "primary": true
+              }
+            ],
+            "status": {
+              "effectiveDate": 1547942400000,
+              "referenceStatus": {
+                "value": "<VALUE_REDACTED>",
+                "name": "<NAME_REDACTED>"
+              },
+              "status": "Terminated"
+            },
+            "address": [
+              {
+                "lineOne": "<LINEONE_REDACTED>",
+                "lineTwo": "<LINETWO_REDACTED>",
+                "cityName": "Village of Grosse Pointe Shores A Michigan City",
+                "state": {
+                  "value": "<VALUE_REDACTED>",
+                  "name": "<NAME_REDACTED>"
+                },
+                "postalCode": "<POSTALCODE_REDACTED>",
+                "countryCode": "US",
+                "type": "Home",
+                "usageType": [
+                  "Street",
+                  "Mailing"
+                ],
+                "effectiveFrom": 1519689600000,
+                "primary": true
+              },
+              {
+                "lineOne": "<LINEONE_REDACTED>",
+                "lineTwo": "<LINETWO_REDACTED>",
+                "cityName": "Juneau",
+                "state": {
+                  "value": "<VALUE_REDACTED>",
+                  "name": "<NAME_REDACTED>"
+                },
+                "postalCode": "<POSTALCODE_REDACTED>",
+                "countryCode": "US",
+                "type": "Work",
+                "usageType": [],
+                "effectiveFrom": 1531267200000,
+                "primary": true
+              }
+            ],
+            "replacementWorker": true
+          }
+        ]
+      }
+    ]
+  }
+}
