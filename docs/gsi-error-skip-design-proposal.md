@@ -54,21 +54,32 @@ This is a short, practical design intended for a technical discussion before any
 
 The job currently produces the GSI file **unconditionally** from whatever data is in Redshift. There is no point in the pipeline that asks: "should this worker / jurisdiction / GSI code actually be emitted given known data-quality errors?" The ticket wants a generic, category-driven decision layer that can suppress worker codes, tax codes, reporting codes, and non-reporting codes when validation errors flagged as MF-impact (`impacts_deposit`) or Agency-impact (`impacts_filing`) exist.
 
-### Confirmed From Code vs. Assumed From Ticket Intent
+### Confirmed From Code
 
-**Confirmed from code:**
 - The pipeline has clear, separable stages where filtering can be inserted (worker DataFrame, tax DataFrame, line assembly).
 - `worker_sk`, `branch_code`, `company_code`, and jurisdiction (`F` / state / state+local) are available before any text line is built.
 - Mappings carry `gsi_code`, `gsi_level`, and `mandatory`; nothing else.
 - No table named `company_errors` or `error_catalog` is queried anywhere in `src/`.
 - The job already runs per `(site, year, quarter)` with all company context known up front - the natural integration point exists.
+- `query_workers()` does not currently expose `organization_unit_sk`, but `query_all_worker_tax()` already uses it internally - so the worker query needs an additive change to surface it for the error join.
 
-**Assumed from ticket intent (must be validated with product/business):**
-- `onetax.company_errors` and `onetax.error_catalog` exist in the same Redshift schema this job already reads from. (Ticket and analysis doc both say so; not verifiable from the repo.)
-- `impacts_deposit = MF impact` and `impacts_filing = Agency impact`. (Stated in the analysis doc; needs business confirmation.)
-- Errors should be evaluated only for `resolution_status = 'Open'` and `write_status = 'PENDING'`.
-- "Reporting vs. non-reporting" is meaningful and will be added as a new piece of mapping metadata. The current code does not classify codes this way.
-- The mapping from a specific error category to a specific skip scope is a **business decision** that must be configurable, not embedded in code.
+### Confirmed From Existing Repository Documentation
+
+Cross-referenced against `docs/gsi-error-based-exclusion-analysis.md`, `docs/gsi-error-skip-master-design.md`, `docs/project-end-to-end.md`, and `docs/reference/GSI_GE59_Q1_2026_*.txt`:
+
+- **Database location.** Both `error_catalog` and `company_errors` live in **Redshift** under the `onetax` schema. This is the same connection (`RedshiftConnection` with `schema='onetax'`) that this job already uses - no new connection or driver needed.
+- **`onetax.error_catalog` schema** (analysis doc §5.1, ~91 records): primary key `error_code`; columns `legacy_error_code`, `name`, `error_type`, `category`, `impacts_deposit` (boolean - **MF impact flag**), `impacts_filing` (boolean - **Agency impact flag**), `created_date_time`, `updated_date_time`, `effective_from`.
+- **`onetax.company_errors` schema** (analysis doc §5.2): primary key `company_error_sk`; columns `organization_unit_sk`, `payroll_run_sk`, `error_code`, `impacted_count`, `resolution_status` (`Open` / `Resolved`), `write_status` (`PENDING` / `WRITTEN` / `SKIPPED`), `state_code`, `local_code`, `tax_type`, `created_date_time`, `resolved_date_time`.
+- **Default filter for in-scope errors:** `resolution_status = 'Open' AND write_status = 'PENDING'` (analysis doc §8.2).
+- **Sample errors visible in the analysis doc** (§6.1, §6.2): `FEIN_IS_MISSING` (legacy `E02`, category `Registration`, filing-impact only), `FEIN_NOT_CORRECT` (legacy `57`, neither flag set), `CA_WAGE_PLAN_MISSING` (legacy `E01`, filing-impact), `E001` (CA Wage Plan, both flags), `E002` (SSN/Validation, filing-impact).
+- **Candidate "specific GSI code" suppression set** (`docs/reference/GSI_GE59_Q1_2026_*.txt`): the COBOL validation block lists tax GSI codes that go conditional on underlying value validity - `FP/6B` (FICAR wage), `IC` (MEDIER wage), `EJ` (FIT WH), `IA/7A` (3PSP MEDI), `FL/5Y` (3PSP tax), `ZE` (EEMEDISR wage), `ZF` (EEMEDISR tax), `EL` (EIC). These are concrete examples of what `SKIP_GSI_CODE` would target.
+- **Where the new module lives** (`docs/project-end-to-end.md`): `src/wd/qtr/gsi_builder/error_handler.py`.
+
+### Remaining Genuinely-Open Items (Product Input Needed)
+
+- The **category -> skip-scope mapping itself**. The master design doc correctly flags this as a business decision rather than an engineering one. The design here is structured so that this mapping lives in a rule catalog and is not embedded in code.
+- **Reporting vs. non-reporting GSI classification.** The current mapping metadata does not carry this. The recommended source is GI1/GI2 if the classification can be derived from existing columns, otherwise a small repo-managed config that lists which GSI codes are "reporting" - same shape as `FIELD_CODE_PATTERNS` today.
+- **`FEIN_NOT_CORRECT` (and any error with both impact flags = `false`)**: should this resolve to `NO_SKIP` plus an audit log, or to a custom scope? Default in this design is `NO_SKIP` until business says otherwise.
 
 ---
 
@@ -218,9 +229,25 @@ This direction is right for this codebase because:
 - A category-driven, rule-catalog approach satisfies the ticket's explicit "generic, not hardcoded per error" requirement.
 - Phased rollout protects every existing tax filing while the rules are tuned.
 
-The two highest-leverage open questions to confirm with the business **before** coding are:
+The single open question to confirm with the business **before** coding is the **category -> skip-scope mapping** itself - a product decision, not an engineering one. Everything else (database location, schema, impact-flag semantics, active-error filter) is already established by the existing repository documentation:
 
-1. Which database (Redshift or PostgreSQL) actually owns `company_errors` and `error_catalog`?
-2. The mapping from each error category to a skip scope - this is a product decision, not an engineering one, and the design assumes it will be supplied as configuration.
+- `onetax.company_errors` and `onetax.error_catalog` live in **Redshift** under the `onetax` schema (analysis doc §5; same connection this job already uses).
+- `impacts_deposit` is the **MF impact** flag and `impacts_filing` is the **Agency impact** flag (analysis doc §5.1).
+- Active errors are filtered by `resolution_status = 'Open' AND write_status = 'PENDING'` (analysis doc §8.2).
+- Concrete `SKIP_GSI_CODE` candidates already exist (e.g. `FP/6B`, `IC`, `EJ`, `IA/7A`, `FL/5Y`, `ZE`, `ZF`, `EL`) per `docs/reference/GSI_GE59_Q1_2026_*.txt`.
 
-Once those are answered, the engineering work is small, well-bounded, and safe to roll out incrementally.
+Once the category -> scope mapping is supplied, the engineering work is small, well-bounded, and safe to roll out incrementally.
+
+### Concrete First-Iteration Deliverables
+
+To make the first sprint actionable:
+
+1. New `src/wd/qtr/gsi_builder/error_handler.py` owning error read, normalization, decision merging, and audit logging.
+2. New `db_connection.RedshiftConnection.query_company_errors(organization_unit_sk, year, quarter)` that joins `onetax.company_errors` to `onetax.error_catalog` and filters on `resolution_status='Open' AND write_status='PENDING'`.
+3. Additive change to `query_workers()` to also surface `organization_unit_sk` so the error join has a key (the column already exists in `worker_tax_qtr_snapshot` and is used internally by `query_all_worker_tax`).
+4. New `db_connection.RedshiftConnection.update_company_errors_write_status(company_error_sks, status)` for the `WRITTEN` / `SKIPPED` write-back, only enabled in the final rollout phase.
+5. A versioned rule-catalog config (e.g. `src/wd/qtr/gsi_builder/config/skip_rules.yaml`) holding the category -> scope mapping; loaded through the existing `config/loader.py` pattern.
+6. Optional `reporting_group` field on GSI mappings (sourced from GI1/GI2 if available, otherwise a small static map).
+7. Decision-aware optional argument added to `apply_gsi_mappings()` and `format_tax_data_df()`; defaults to no-op when omitted.
+
+Each item is independently testable and can be rolled out behind logging-only flags before any output behavior changes.
