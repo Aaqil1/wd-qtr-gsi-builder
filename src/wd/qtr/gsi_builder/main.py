@@ -9,6 +9,7 @@ from pyspark.sql.functions import array, col, concat, explode, lit
 from wd.qtr.gsi_builder.config.loader import get_config, get_spark_config
 from wd.qtr.gsi_builder.db_connection import PostgresConnection, RedshiftConnection
 from wd.qtr.gsi_builder.email_notifier import EmailNotifier
+from wd.qtr.gsi_builder.error_handler import resolve_error_skip_decision
 from wd.qtr.gsi_builder.flow_validator import validate_config
 from wd.qtr.gsi_builder.gsi_formatter import apply_gsi_mappings, format_tax_data_df
 from wd.qtr.gsi_builder.gsi_mappings import load_mappings
@@ -143,6 +144,8 @@ def process_site_event(batch_id, site_id, year, quarter, window_start, window_en
 
         all_worker_lines = []
         all_tax_lines = []
+        skipped_companies = 0
+        skipped_workers = set()
         total_record_count = 0
 
         for idx, company_row in enumerate(companies, 1):
@@ -151,11 +154,32 @@ def process_site_event(batch_id, site_id, year, quarter, window_start, window_en
             company_start_time = time.time()
             logger.info(f"[{idx}/{len(companies)}] Processing branch: {branch_code}, company: {company_code}")
 
+            skip_decision = resolve_error_skip_decision(
+                db_conn, site_id, branch_code, company_code, year, quarter
+            )
+            if skip_decision.skip_company:
+                skipped_companies += 1
+                logger.info(
+                    f"[{idx}/{len(companies)}] Skipping entire company {branch_code}/{company_code} "
+                    f"because company_errors joined to error_catalog has impacts_filing=true"
+                )
+                continue
+
             try:
                 df = db_conn.query_workers(branch_code, company_code, year, quarter)
                 if df is None or df.isEmpty():
                     logger.warning(f"No workers found for {branch_code}/{company_code}")
                     continue
+                if skip_decision.worker_sks_to_skip:
+                    worker_skip_values = list(skip_decision.worker_sks_to_skip)
+                    skipped_workers.update(worker_skip_values)
+                    df = df.filter(~col("worker_sk").cast("string").isin(worker_skip_values))
+                    if df.isEmpty():
+                        logger.info(
+                            f"All workers skipped for {branch_code}/{company_code} due to "
+                            "worker filing-impact errors"
+                        )
+                        continue
             except Exception as e:
                 logger.error(f"Worker query failed for {branch_code}/{company_code}: {e}")
                 continue
@@ -218,6 +242,18 @@ def process_site_event(batch_id, site_id, year, quarter, window_start, window_en
             try:
                 tax_df = db_conn.query_all_worker_tax(company_code, year, quarter)
                 if tax_df is not None and not tax_df.isEmpty():
+                    if skip_decision.worker_sks_to_skip:
+                        tax_df = tax_df.filter(
+                            ~col("worker_sk").cast("string").isin(
+                                list(skip_decision.worker_sks_to_skip)
+                            )
+                        )
+                        if tax_df.isEmpty():
+                            logger.info(
+                                f"All tax rows skipped for {branch_code}/{company_code} due to "
+                                "worker filing-impact errors"
+                            )
+                            continue
                     try:
                         tax_df_validated, validation_results = validate_mandatory_fields(tax_df, df)
                         log_mandatory_fields_summary(validation_results)
@@ -236,6 +272,24 @@ def process_site_event(batch_id, site_id, year, quarter, window_start, window_en
             logger.info(f"[{idx}/{len(companies)}] Company {branch_code}/{company_code} completed in {time.time() - company_start_time:.2f}s")
 
         if not all_worker_lines:
+            if skipped_companies or skipped_workers:
+                logger.info(
+                    f"No output rows remain for site {site_id} after filing-error skips; "
+                    f"skipped_companies={skipped_companies}, skipped_workers={len(skipped_workers)}"
+                )
+                db_conn.update_outbound_file_status(batch_id, site_id, year, quarter, OutboundFileStatus.SKIPPED)
+                email_notifier.send_notification(event_start, event, "SKIPPED", None, env, job_url)
+                return {
+                    "site_id": site_id,
+                    "year": year,
+                    "quarter": quarter,
+                    "processed": True,
+                    "record_count": 0,
+                    "output_file": None,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "processing_time": (datetime.now(timezone.utc) - event_start).total_seconds(),
+                    "message": f"Skipped all output for site {site_id} because filing-impact errors removed all companies/workers",
+                }
             raise Exception(f"No worker data found for site: {site_id}")
 
         from functools import reduce
