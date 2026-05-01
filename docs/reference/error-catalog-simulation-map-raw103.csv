@@ -1,0 +1,104 @@
+scenario_id,worker_id,branch_code,company_code,site_id,error_code,legacy_error_code,name,severity,error_type,category,impacts_deposit,impacts_filing,mutation_confidence,mutation_summary
+1,000001,AA,E001,S001,SSN_NON_NUM,73,SSN IS NON-NUMERIC,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 12A45B789
+2,000002,AB,E002,S002,SSN_F3_0,73,SSN FIRST 3 DIGITS ARE 000,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 000123456
+3,000003,AC,E003,S003,SSN_F3_6,73,SSN FIRST 3 DIGITS ARE 666,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 666123456
+4,000004,AD,E004,S004,SSN_M2_0,73,SSN MIDDLE 2 DIGITS ARE 00,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 123004567
+5,000005,AE,E005,S005,SSN_L4_0,73,SSN LAST 4 DIGITS ARE 0000,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 123450000
+6,000006,AF,E006,S006,SSN_EQ_NUM,73,SSN ALL SAME REPEATING DIGIT,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 111111111
+7,000007,AG,E007,S007,SSN_REV_SEQ,73,SSN IS REVERSE SEQUENTIAL,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 987654321
+8,000008,AH,E008,S008,SSN_SEQ,73,SSN IS SEQUENTIAL,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 123456789
+9,000009,AI,E009,S009,SSN_F1_9,73,SSN STARTS WITH 9,HIGH,SSN,WORKER_PROFILE,False,False,direct,Set worker SSN to 912345678
+10,000010,AJ,E010,S010,FEIN_NOT_CORRECT,57,FEIN is incorrect,HIGH,TAX,COMPANY,False,False,direct,Set organization-unit FEIN to intentionally invalid value
+11,000011,AK,E011,S011,PAY_FREQ_MIS,307,PAY FREQUENCY MISSING,HIGH,TAX,COMPANY,False,False,direct,Removed payFrequency from worker assignment
+12,000012,AL,E012,S012,PAY_FREQ_INV,308,INVALID PAY FREQUENCY,HIGH,TAX,COMPANY,False,False,direct,Set payFrequency to invalid value
+13,000013,AM,E013,S013,EMP_CNT_MIS,309,MALE/FEM COUNT MISSING,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+14,000014,AN,E014,S014,YD_FIT_TAX_MIS,10,YTD FIT TAX/NO WAGE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set FIT YTD tax while YTD taxable wage is zero
+15,000015,AO,E015,S015,SUI_SUBWG_LT_TAXWG,30,ER TXBL MORE THAN SUBJ WAGES,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set SUI subject wage below taxable wage
+16,000016,AP,E016,S016,SUI_TAXWG_LT_SUBWG,31,ER TXBL MORE THAN SUBJ WAGES,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set SUI taxable wage below subject wage
+17,000017,AQ,E017,S017,YD_MED_TAX_WG_NE,41,YTD NEGATIVE ADD L MEDE WG,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set Medicare taxable wages negative
+18,000018,AR,E018,S018,YD_EMP_MED_TAX_NG,43,YTD NEGATIVE ADD L MEDE TX,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set Medicare employee tax amount negative
+19,000019,AS,E019,S019,YD_FIT_WG_MIS,08,YTD FIT TAX/NO WAGE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set FIT YTD tax while YTD taxable wage is zero
+20,000020,AT,E020,S020,YD_SIT_WG_MIS,12,YTD SIT TAX/NO WAGE,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set SIT YTD tax while YTD taxable wage is zero
+21,000021,AU,E021,S021,QD_CA_VPDI_SDI_NE_SUI_WG,CA,QTD_CA_VPDI_SDI_NE_SUI_SUBJ_WG,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to CA; Scenario needs final validation-rule field mapping review
+22,000022,AV,E022,S022,WV_SUI_CNTY_WRKD_MIS,CN,WV SUI-MISSNG/BLNK CNTY WRKD FLD,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to WV; Scenario needs final validation-rule field mapping review
+23,000023,AW,E023,S023,NJ_FLI_QD_SUBJ_GT_YD,F1,NJ_FLI_QTD_SUBJ_WG_GT_YTD,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to NJ; Scenario needs final validation-rule field mapping review
+24,000024,AX,E024,S024,NJ_FLI_QD_SUBJ_LT_YD,F2,NJ_FLI_QTD_SUBJ_WG_LT_YTD,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to NJ; Scenario needs final validation-rule field mapping review
+25,000025,AY,E025,S025,BIRTH_DT_MIS,53,DATE OF BIRTH NOT PASSED,HIGH,W2_REPORTING,PAYROLL,False,False,direct_if_birthDate_is_source_field,Ensured worker birthDate is absent
+26,000026,AZ,E026,S026,BIRTH_DT_OOR,56,BIRTHDATE NOT WITHIN CODE E,HIGH,W2_REPORTING,PAYROLL,False,False,direct_if_birthDate_is_source_field,Set birthDate outside expected exemption range
+27,000027,BA,E027,S027,EXE_SAL_EXC_E,57,EXEMPT SALARY EXCEEDS CODE E,HIGH,W2_REPORTING,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+28,000028,BB,E028,S028,RET_FUND_CODA_GT_0,54,RET FUND AND CODA GREATER THAN 0,HIGH,W2_REPORTING,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+29,000029,BC,E029,S029,DE_PFML_WG_HRS_MIS,D3,"DE PFML-WG > 0, HRS WRKD MISSING",HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to DE; PFML taxable wage positive with missing hours/weeks represented by absent reporting fields
+30,000030,BD,E030,S030,DE_PFML_WG_WKS_MIS,D4,"DE PFML-WG > 0, WEEKS WRKD MISSING",HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to DE; PFML taxable wage positive with missing hours/weeks represented by absent reporting fields
+31,000031,BE,E031,S031,DE_PFML_QTD_WKS_GT_14,D5,DE PFML-QTD WEEKS WRKD CANT BE >14,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to DE; Added simulation marker for DE QTD weeks > 14
+32,000032,BF,E032,S032,DE_PFML_YTD_WKS_GT_53,D6,DE PFML-YTD WEEKS WRKD CANT BE >53,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to DE; Added simulation marker for DE YTD weeks > 53
+33,000033,BG,E033,S033,DE_PFML_HRS_GT_2200,D7,DE PFML HRS WRKD CANT BE >2200,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to DE; Added simulation marker for DE hours > 2200
+34,000034,BH,E034,S034,QD_MED_TAX_WG_NE,40,QTD NEGATIVE ADD L MEDE WG,HIGH,WORKER_TAX,WORKER_PROFILE,False,False,needs_rule_confirmation,Set Medicare taxable wages negative
+35,000035,BI,E035,S035,YD_MED_WG_LT_SSAE_OR_TIPS,49,YTD MEDC WG<SSAE WG/TIPS,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set Medicare YTD taxable wage below SSAE YTD taxable wage
+36,000036,BJ,E036,S036,QD_FIT_WG_MIS,07,QTD FIT TAX/NO WAGE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set FIT QTD tax while QTD taxable wage is zero
+37,000037,BK,E037,S037,YD_SSAE_WG_MIS,08,YTD SSAE TAX/NO WAGE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set Social Security YTD tax while YTD taxable wage is zero
+38,000038,BL,E038,S038,SSAE_WG_MIS,09,YTD SSAE TAX/NO WAGE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set Social Security YTD tax while YTD taxable wage is zero
+39,000039,BM,E039,S039,DE_PFML_ER_CNTRB_PCT_OOR,D1,DE PFML-ER CNTRB CANNOT BE < 50% OR > 100%,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to DE; Added simulation marker for DE PFML ER contribution percent out of range
+40,000040,BN,E040,S040,QD_EMP_MED_TAX_NEG,42,QTD NEGATIVE ADD L MEDE TX,HIGH,WORKER_TAX,WORKER_PROFILE,False,False,needs_rule_confirmation,Set Medicare employee tax amount negative
+41,000041,BO,E041,S041,E002,02,SSN invalid,MEDIUM,SSN,Validation,False,True,direct,Set worker SSN to 000000000
+42,000042,BP,E042,S042,E001,01,CA wage plan missing,HIGH,CAWagePlan,WagePlan,True,True,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+43,000043,BQ,E043,S043,CA_WAGE_PLAN_MISSING,E01,California wage plan code is missing or incorrect,ERROR,CA_WAGE_PLAN,WagePlan,False,True,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+44,000044,BR,E044,S044,FEIN_IS_MISSING,E02,FEIN is missing,ERROR,TAX_ID,Registration,False,True,direct,Removed organization-unit FEIN
+45,000045,BS,E045,S045,SUI_RATE_INVALID,E03,SUI rate is invalid or missing,WARNING,UNEMP_INS,WagePlan,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+46,000046,BT,E046,S046,FL_REEMPLOY_CODE,E04,Florida reemployment code missing,WARNING,REEMPLOY_ASST,WagePlan,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+47,000047,BU,E047,S047,MW_ID_MIS,29,Multiple worksite ID miss,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+48,000048,BV,E048,S048,SUIER_TX_RT_MIS,RM,SUIER RATE 0 WITH SUIR TAXABLE WAGE >0,HIGH,WORKER_TAX,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+49,000049,BW,E049,S049,TOS_0_TX_WG_GT_0,TS,TOS IS 0 WITH SUIR TAXABLE WAGE > 0,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+50,000050,BX,E050,S050,WG_GT_0_HRS_0_NO_RSN,ZH,"WA-SUI WG>0,HRS=0 & NO RSN CODE",HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Set wages positive and hours zero/missing via simulation marker
+51,000051,BY,E051,S051,YD_COBRA_MED_NEG,9P,NEED RECLOSE-COBRA PREMIUMS ARE NEGATIVE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set YTD Medicare taxable amount negative
+52,000052,BZ,E052,S052,QD_SDIE_LT_SUI_TXWG,9S,MAY NEED RECLOSE - SDIE TXBL < SUIR TXBL,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Scenario placeholder; exact CDM trigger field needs validation-rule review
+53,000053,CA,E053,S053,QD_FIT_TXWH_NE_0,9T,QTD FIT WH WITH TAX CLASS P,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set FIT QTD withholding non-zero and mark worker taxClass=P
+54,000054,CB,E054,S054,MA_FLI_EE_PCT_OOR,FL,FLI EXCEEDS MAX ALLOWED 100%,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to MA; Added simulation marker for MA leave contribution percent out of range
+55,000055,CC,E055,S055,MA_PML_EE_PCT_OOR,FL,FLI EXCEEDS MAX ALLOWED 100%,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to MA; Added simulation marker for MA leave contribution percent out of range
+56,000056,CD,E056,S056,SUI_PLAN_MIS,22,NJ SUIEE PLAN NUMBER MISSING,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+57,000057,CE,E057,S057,HLT_INS_IND_INV,14,VT HEALTH INSURANCE INDICATOR INVALID,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+58,000058,CF,E058,S058,LIV_PSD_MIS,27,LIVED IN PSD CODE MISSING,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+59,000059,CG,E059,S059,PRT_IND_INV,13,VT WG DTL:INFO PROB:A7/A8,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+60,000060,CH,E060,S060,WC_INF_MIS,WC,WORKER COMPENSATION INFO MISSING,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+61,000061,CI,E061,S061,SDIR_TX_WG_NE_SDIE,NJ,SDIR TXBL WG NE SDIE TXBL WG,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+62,000062,CJ,E062,S062,FI_TAX_CR,922,0 OR 1 FIT TOS W/FIT TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+63,000063,CK,E063,S063,FUTA_CR,923,0 OR 1 FUTA TOS W/TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+64,000064,CL,E064,S064,SIT_CR,924,0 OR 1 SIT TOS W/SIT TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+65,000065,CM,E065,S065,SUIEE_CR,925,0 OR 1 SUI-EE TOS W/TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+66,000066,CN,E066,S066,SUIER_CR,926,0 OR 1 SUI-ER TOS W/TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+67,000067,CO,E067,S067,SDIEE_CR,927,0 OR 1 SDI-EE TOS W/TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+68,000068,CP,E068,S068,SDIER_CR,928,0 OR 1 SDI-ER TOS W/TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+69,000069,CQ,E069,S069,CIT_CR,929,0 OR 1 CIT TOS W/CIT TAX,LOW,SERVICE_LEVEL,COMPANY,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+70,000070,CR,E070,S070,SIT_CIT_TXWH_GT_FIT_TX_WG,N1,NY (SIT+CIT) TAX-WH > FIT-TXBL-WG,HIGH,WORKER_TAX,EMPLOYEE,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+71,000071,CS,E071,S071,WG_PLN_MIS,15,MISSING WAGE PLAN CODE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to CA
+72,000072,CT,E072,S072,WG_DIFF_NEQ,19,NJ WG DIFF:SUIER SDIEE VDPI,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Scenario needs final validation-rule field mapping review
+73,000073,CU,E073,S073,PR_INV_PART_TIME_EE,34,INVALID PART TIME EE VALUE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to PR; Set Puerto Rico part-time indicator to invalid value
+74,000074,CV,E074,S074,PA_PSD_510101_LOC_NE_3901_3912,44,PSD 510101 NOT LOC 3901/3912 EE File number,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to PA; Scenario needs final validation-rule field mapping review
+75,000075,CW,E075,S075,SC_SUI_WG_GT_0_HRS_LE_0,H1,"SC SUI- WAGE > 0,HRS WRKED <= 0",HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to SC; Set wages positive and hours zero/missing via simulation marker
+76,000076,CX,E076,S076,SC_SUI_WG_GT_0_HRS_MIS,H2,"SC SUI-WAGE > 0, HRS WRKD MISSNG",HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to SC; Set wages positive and hours zero/missing via simulation marker
+77,000077,CY,E077,S077,WV_SUI_INV_CNTY_WRKD,IC,WV SUI - INVALID COUNTY WRKD FLD,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to WV; Scenario needs final validation-rule field mapping review
+78,000078,CZ,E078,S078,WV_SUI_JOB_TTL_SOC_MIS,J4,WV SUI-MISSNG/BLNK JOB TTL & SOC,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to WV; Blanked job title / occupation simulation fields
+79,000079,DA,E079,S079,WV_SUI_JOB_TTL_SPCL_CHR,JN,WV SUI- JOB TITLE HAS SPCL CHARS,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to WV; Set job title with special characters
+80,000080,DB,E080,S080,SC_SUI_SOC_CODE_MIS,JS,SC SUI - MISSNG/BLNK SOC CODE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to SC; Blanked job title / occupation simulation fields
+81,000081,DC,E081,S081,MA_MLI_EE_PCT_OOR,ML,MLI EXCEEDS MAX ALLOWED 40%,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Set primary state jurisdiction to MA; Added simulation marker for MA leave contribution percent out of range
+82,000082,DD,E082,S082,SSN_NON_NUM,73,SSN IS NON-NUMERIC,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 12A45B789
+83,000083,DE,E083,S083,SSN_F3_0,73,SSN FIRST 3 DIGITS ARE 000,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 000123456
+84,000084,DF,E084,S084,SSN_F3_6,73,SSN FIRST 3 DIGITS ARE 666,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 666123456
+85,000085,DG,E085,S085,SSN_M2_0,73,SSN MIDDLE 2 DIGITS ARE 00,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 123004567
+86,000086,DH,E086,S086,SSN_L4_0,73,SSN LAST 4 DIGITS ARE 0000,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 123450000
+87,000087,DI,E087,S087,SSN_EQ_NUM,73,SSN ALL SAME REPEATING DIGIT,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 111111111
+88,000088,DJ,E088,S088,SSN_REV_SEQ,73,SSN IS REVERSE SEQUENTIAL,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 987654321
+89,000089,DK,E089,S089,SSN_SEQ,73,SSN IS SEQUENTIAL,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 123456789
+90,000090,DL,E090,S090,SSN_F1_9,73,SSN STARTS WITH 9,HIGH,SSN,WORKER_PROFILE,False,False,direct,Duplicate catalog row scenario; same mutation as first occurrence. Set worker SSN to 912345678
+91,000091,DM,E091,S091,MW_ID_MIS,29,Multiple worksite ID miss,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
+92,000092,DN,E092,S092,SUIER_TX_RT_MIS,RM,SUIER RATE 0 WITH SUIR TAXABLE WAGE >0,HIGH,WORKER_TAX,COMPANY,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
+93,000093,DO,E093,S093,TOS_0_TX_WG_GT_0,TS,TOS IS 0 WITH SUIR TAXABLE WAGE > 0,HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
+94,000094,DP,E094,S094,WG_GT_0_HRS_0_NO_RSN,ZH,"WA-SUI WG>0,HRS=0 & NO RSN CODE",HIGH,TAX,COMPANY,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Set wages positive and hours zero/missing via simulation marker
+95,000095,DQ,E095,S095,YD_COBRA_MED_NEG,9P,NEED RECLOSE-COBRA PREMIUMS ARE NEGATIVE,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Set YTD Medicare taxable amount negative
+96,000096,DR,E096,S096,QD_SDIE_LT_SUI_TXWG,9S,MAY NEED RECLOSE - SDIE TXBL < SUIR TXBL,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario placeholder; exact CDM trigger field needs validation-rule review
+97,000097,DS,E097,S097,QD_FIT_TXWH_NE_0,9T,QTD FIT WH WITH TAX CLASS P,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Set FIT QTD withholding non-zero and mark worker taxClass=P
+98,000098,DT,E098,S098,MA_FLI_EE_PCT_OOR,FL,FLI EXCEEDS MAX ALLOWED 100%,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Set primary state jurisdiction to MA; Added simulation marker for MA leave contribution percent out of range
+99,000099,DU,E099,S099,MA_PML_EE_PCT_OOR,FL,FLI EXCEEDS MAX ALLOWED 100%,HIGH,TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Set primary state jurisdiction to MA; Added simulation marker for MA leave contribution percent out of range
+100,000100,DV,E100,S100,SUI_PLAN_MIS,22,NJ SUIEE PLAN NUMBER MISSING,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
+101,000101,DW,E101,S101,HLT_INS_IND_INV,14,VT HEALTH INSURANCE INDICATOR INVALID,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
+102,000102,DX,E102,S102,LIV_PSD_MIS,27,LIVED IN PSD CODE MISSING,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
+103,000103,DY,E103,S103,PRT_IND_INV,13,VT WG DTL:INFO PROB:A7/A8,HIGH,WORKER_TAX,PAYROLL,False,False,needs_rule_confirmation,Duplicate catalog row scenario; same mutation as first occurrence. Scenario needs final validation-rule field mapping review
